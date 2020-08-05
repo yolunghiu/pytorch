@@ -4,7 +4,6 @@ from PIL import Image
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
 from torch.utils.tensorboard import SummaryWriter
-from common_tools import set_seed
 import torchvision.models as models
 
 # ----------------------------------- feature map visualization -----------------------------------
@@ -32,7 +31,6 @@ alexnet = models.alexnet(pretrained=True)
 # 注册hook
 fmap_dict = dict()
 for name, sub_module in alexnet.named_modules():
-
     if isinstance(sub_module, nn.Conv2d):
         key_name = str(sub_module.weight.shape)
         fmap_dict.setdefault(key_name, list())

@@ -17,7 +17,7 @@ if flag:
 
     alexnet = models.alexnet(pretrained=True)
 
-    kernel_num = -1
+    kernel_num = 0
     vis_max = 1
 
     for sub_module in alexnet.modules():
