@@ -2,9 +2,13 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+"""
+Notes: 这个损失函数就是一个Sigmoid层+BCELoss
+"""
+
 # ----------------------------------- BCE with Logis Loss -----------------------------------
-flag = 0
-# flag = 1
+# flag = 0
+flag = 1
 if flag:
     inputs = torch.tensor([[1, 2], [2, 2], [3, 4], [4, 5]], dtype=torch.float)
     target = torch.tensor([[1, 0], [1, 0], [0, 1], [0, 1]], dtype=torch.float)
@@ -27,6 +31,12 @@ if flag:
     # view
     print("\nweights: ", weights)
     print(loss_none_w, loss_sum, loss_mean)
+
+    # 先对input进行sigmoid激活，再算BCELoss，结果与BCEWithLogitsLoss一致
+    loss_f_bce = nn.BCELoss(reduction='sum')
+    inputs_sigmoid = nn.Sigmoid()(inputs)
+    loss_bce = loss_f_bce(inputs_sigmoid, target)
+    print(loss_bce)
 
 # --------------------------------- pos weight
 
